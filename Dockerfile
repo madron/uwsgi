@@ -12,8 +12,11 @@ RUN    gpg --keyserver pool.sks-keyservers.net --recv-keys B42F6819007F00F88E364
     && gpg --verify /usr/local/bin/gosu.asc \
     && rm /usr/local/bin/gosu.asc \
     && chmod +x /usr/local/bin/gosu \
-    && pip install uWSGI==2.0.9 \
     && apt-get purge -y --auto-remove curl
+
+RUN pip install \
+    uWSGI==2.0.9 \
+    gevent==1.0.1
 
 COPY docker-entrypoint.sh /
 
