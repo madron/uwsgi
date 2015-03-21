@@ -20,7 +20,5 @@ RUN pip install \
 
 COPY docker-entrypoint.sh /
 
-EXPOSE 5432
-
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["uwsgi"]
