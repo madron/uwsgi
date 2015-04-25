@@ -15,7 +15,7 @@ RUN    gpg --keyserver pool.sks-keyservers.net --recv-keys B42F6819007F00F88E364
     && apt-get purge -y --auto-remove curl
 
 RUN pip install \
-    uWSGI==2.0.9 \
+    uWSGI==2.0.10 \
     gevent==1.0.1
 
 COPY docker-entrypoint.sh /
