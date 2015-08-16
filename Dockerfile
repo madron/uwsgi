@@ -19,7 +19,7 @@ RUN    gpg --keyserver pool.sks-keyservers.net --recv-keys B42F6819007F00F88E364
 
 # Packages
 RUN DEBIAN_FRONTEND=noninteractive apt-get update \
-    && DEBIAN_FRONTEND=noninteractive apt-get install -y python-pip python-dev \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -y python-pip python-dev libpcre3-dev \
     && rm -rf /var/lib/apt/lists/*
 
 
