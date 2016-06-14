@@ -1,11 +1,11 @@
-FROM alpine:3.3
+FROM alpine:3.4
 
 MAINTAINER Massimiliano Ravelli <massimiliano.ravelli@gmail.com>
 
 RUN    echo "@testing http://nl.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
     && apk update \
     && apk add py-pip \
-    && apk add uwsgi-python==2.0.11.2-r0 \
+    && apk add uwsgi-python==2.0.13-r0 \
     && apk add gosu@testing \
     && apk add nginx \
     && rm -rf /var/cache/apk/* \
@@ -21,9 +21,6 @@ RUN    echo "@testing http://nl.alpinelinux.org/alpine/edge/testing" >> /etc/apk
 COPY entrypoint.sh /
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY nginx.vh.default.conf /etc/nginx/conf.d/default.conf
-
-# VOLUME ["/run/uwsgi"]
-VOLUME ["/var/run", "/var/lib/nginx/tmp"]
 
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["nginx"]
