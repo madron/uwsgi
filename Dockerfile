@@ -1,14 +1,6 @@
-FROM alpine:edge
+FROM alpine:3.5
 
-MAINTAINER Massimiliano Ravelli <massimiliano.ravelli@gmail.com>
-
-RUN    echo "@testing http://nl.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
-    && apk update \
-    && apk add python3 \
-    && apk add uwsgi-python3==2.0.14-r3 \
-    && apk add gosu@testing \
-    && apk add nginx \
-    && rm -rf /var/cache/apk/* \
+RUN    apk --no-cache add su-exec uwsgi-python3==2.0.14-r4 nginx \
     \
     # forward request and error logs to docker log collector
     && ln -sf /dev/stdout /var/log/nginx/access.log \
