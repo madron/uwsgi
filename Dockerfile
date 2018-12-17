@@ -1,10 +1,29 @@
-FROM alpine:3.8
+# FROM alpine:3.8
 
-RUN    apk --no-cache add su-exec==0.2-r0 uwsgi-python3==2.0.17-r1 nginx==1.14.0-r0 \
-    \
-    # forward request and error logs to docker log collector
-    && ln -sf /dev/stdout /var/log/nginx/access.log \
-    && ln -sf /dev/stderr /var/log/nginx/error.log
+# RUN    apk --no-cache add su-exec==0.2-r0 uwsgi-python3==2.0.17-r1 nginx==1.14.0-r0 \
+#     \
+#     # forward request and error logs to docker log collector
+#     && ln -sf /dev/stdout /var/log/nginx/access.log \
+#     && ln -sf /dev/stderr /var/log/nginx/error.log
+
+# COPY docker /docker/
+# COPY nginx.conf /etc/nginx/nginx.conf
+
+# ENTRYPOINT ["/docker/entrypoint.sh"]
+# CMD ["nginx"]
+
+
+
+
+
+FROM python:3.7.1-slim-stretch
+
+RUN apt-get update
+RUN apt-get install -y nginx=1.10.3-1+deb9u2
+RUN apt-get install -y uwsgi-plugin-python3=2.0.14+20161117-3+deb9u2
+# forward request and error logs to docker log collector
+RUN ln -sf /dev/stdout /var/log/nginx/access.log
+RUN ln -sf /dev/stderr /var/log/nginx/error.log
 
 COPY docker /docker/
 COPY nginx.conf /etc/nginx/nginx.conf
