@@ -8,6 +8,8 @@ RUN apt-get update && apt-get install -y \
     && ln -sf /dev/stdout /var/log/nginx/access.log \
     && ln -sf /dev/stderr /var/log/nginx/error.log
 
+RUN useradd --no-create-home nginx
+
 COPY docker /docker/
 COPY nginx.conf /etc/nginx/nginx.conf
 
