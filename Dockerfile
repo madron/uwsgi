@@ -1,10 +1,19 @@
-FROM alpine:3.8
+FROM python:3.7.1-slim-stretch
 
-RUN    apk --no-cache add su-exec==0.2-r0 uwsgi-python3==2.0.17-r1 nginx==1.14.0-r0 \
+RUN apt-get update && apt-get install -y \
+    nginx=1.10.3-1+deb9u2 \
+    gcc \
+    uwsgi-plugin-python3=2.0.14+20161117-3+deb9u2 \
     \
     # forward request and error logs to docker log collector
     && ln -sf /dev/stdout /var/log/nginx/access.log \
     && ln -sf /dev/stderr /var/log/nginx/error.log
+
+RUN pip3 install uwsgi==2.0.17.1
+
+RUN apt-get clean
+
+RUN useradd --no-create-home nginx
 
 COPY docker /docker/
 COPY nginx.conf /etc/nginx/nginx.conf
