@@ -1,6 +1,6 @@
-FROM python:3.7.1-slim-stretch
+FROM python:3.7.2-slim-stretch
 
-ENV UWSGI_VERSION=2.0.17.1
+ARG UWSGI_VERSION=2.0.17.1
 
 RUN    /bin/true \
     \
