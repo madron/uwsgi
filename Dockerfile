@@ -1,6 +1,6 @@
-FROM alpine:3.8
+FROM alpine:3.11
 
-RUN    apk --no-cache add su-exec==0.2-r0 uwsgi-python3==2.0.17-r1 nginx==1.14.0-r0 \
+RUN    apk --no-cache add su-exec==0.2-r1 uwsgi-python==2.0.18-r4 nginx==1.16.1-r4 \
     \
     # forward request and error logs to docker log collector
     && ln -sf /dev/stdout /var/log/nginx/access.log \
